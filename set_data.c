@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/05/01 15:17:00 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/05/01 19:41:08 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+t_data	set_data(void)
 {
-	t_data	data;
+	t_data data;
 
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	data.end = NULL;
+	data.start = NULL;
+	data.line = NULL;
+	data.error = 0;
+	data.pipe = 0;
+	data.std.in = dup(STDIN_FILENO);
+	data.std.out = dup(STDOUT_FILENO);
+	data.pid_fork = -2;
+	data.fd.in = -2;
+	data.fd.out = -2;
+	return (data);
 }

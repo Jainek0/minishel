@@ -25,6 +25,7 @@ SRC =		src/ft_isalpha.c \
 			src/ft_strjoin.c \
 			src/ft_strtrim.c \
 			src/ft_split.c \
+			src/ft_split_r.c \
 			src/ft_itoa.c \
 			src/ft_strmapi.c \
 			src/ft_striteri.c \
@@ -32,6 +33,8 @@ SRC =		src/ft_isalpha.c \
 			src/ft_putstr_fd.c \
 			src/ft_putendl_fd.c \
 			src/ft_putnbr_fd.c \
+			src/ft_tab2len.c \
+			src/ft_n_realloc.c \
 							\
 			ft_printf/ft_printf.c \
 			ft_printf/ft_put_fd.c \

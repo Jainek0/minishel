@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tab2len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/21 20:05:38 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/04/29 08:56:36 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+int	ft_tab2len(char **tab)
 {
-	t_data	data;
+	int	i;
 
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

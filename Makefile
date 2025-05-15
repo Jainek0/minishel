@@ -1,11 +1,15 @@
 NAME		= minishell
 
 SRC			= 	main.c \
-				list.c 	\
-				export.c \
-				utils_0.c \
-				set_envs.c \
-				minishell.c
+				mini_echo.c	\
+				mini_pwd.c	 \
+				mini_cd.c	  \
+				mini_execve.c \
+				mini_env.c		 \
+				utils_env.c\
+				tmp.c		\
+				liberate_all.c\
+				utils.c
 
 OBJ			= $(SRC:.c=.o)
 

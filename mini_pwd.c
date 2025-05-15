@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/21 16:10:28 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/04/29 15:28:20 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+void	mini_pwd(t_data *data)
 {
-	t_data	data;
+	char	*path;
 
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	path = getcwd(0, 0);
+	if (*path)
+	{
+		printf("%s\n", path);
+		free(path);
+		data->error = 0;
+	}
+	else
+	{
+		ft_putstr_fd(ERROR_GETWCD, 2);
+		data->error = 1;
+	}
 }

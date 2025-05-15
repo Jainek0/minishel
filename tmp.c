@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/21 19:04:05 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/04/29 09:04:33 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+t_envlist	*lst_add_front(t_envlist *env, char *content)
 {
-	t_data	data;
+	t_envlist	*new;
 
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	new = malloc(sizeof(t_envlist));
+	if (!new)
+		return (0);
+	new->at = ft_strdup((const char *) content);
+	if (!new->at)
+		return (0);
+	new->next = env;
+	return (new);
+}
+
+void	set_envs(t_data *data, char **envp)
+{
+	int			i;
+
+	i = -1;
+	if (!envp)
+		return ;
+	data->start = 0;
+	while (envp[++i])
+		data->start = lst_add_front(data->start, envp[i]);
 }

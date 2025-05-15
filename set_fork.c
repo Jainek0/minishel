@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_fork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/05/01 15:15:42 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/05/02 19:03:24 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+void	set_fork(t_data data)
 {
-	t_data	data;
-
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	if (data->pid_fork <= -1)
+	{
+		data->pid_fork = fork();
+		if (data->pid_fork == -1)
+			mini_liberate_all(data, "Error : FORK", 1);
+		if (data->pid_fork == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
+		}
+	}
 }

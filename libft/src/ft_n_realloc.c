@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_n_realloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thcaquet <thcaquet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:03 by thcaquet          #+#    #+#             */
-/*   Updated: 2025/05/01 15:25:47 by thcaquet         ###   ########.fr       */
+/*   Created: 2025/04/24 19:26:36 by thcaquet          #+#    #+#             */
+/*   Updated: 2025/04/29 08:56:26 by thcaquet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	g_status = 1;
-
-int main(int ac, char **av, char **envp)
+char	*ft_n_realloc(char *str, int len)
 {
-	t_data	data;
+	char	*new;
+	int		i;
 
-	data = set_data();
-	(void)av;
-	(void)envp;
-	(void)ac;
-	set_envs(&data, envp);
-	mini_execve(&data, &av[1]);
-	free_data(&data);
-	return (0);
+	i = -1;
+	new = malloc(len + 1);
+	if (!new)
+		return (0);
+	while (str[++i] && i < len)
+		new[i] = str[i];
+	while (i <= len)
+		new[i++] = 0;
+	if (str)
+		free(str);
+	return (new);
 }
